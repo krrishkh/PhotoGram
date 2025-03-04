@@ -1,0 +1,16 @@
+{
+  "name": "photogram",
+  "version": "1.0.0",
+  "description": "A picture sharing plateform",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "KrrishKhandelwal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
