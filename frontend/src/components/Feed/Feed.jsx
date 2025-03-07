@@ -80,31 +80,44 @@ const Feed = () => {
   if (loading) return <p>Loading posts...</p>;
 
   return (
-    <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {posts.map((post) => (
-        <div key={post._id} className="border rounded-lg shadow-lg">
-          <div className="w-full aspect-square overflow-hidden">
-            <img
-              src={post.image}
-              alt="Post"
-              className="w-full h-full object-cover rounded-md"
-            />
-          </div>
-          <p className="mt-2 text-lg px-2">{post.content}</p>
-          <p className="text-sm text-gray-500 px-2">
-            By: {post.author?.fullname || "Unknown"}
-          </p>
-          <div className="px-2 py-2 flex items-center">
-            <button
-              onClick={() => handleLike(post._id)}
-              className="text-blue-500 hover:text-blue-700"
-            >
-              ❤️ {post.likes.length}
-            </button>
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {posts.map((post) => (
+      <div key={post._id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        
+        {/* Image Section */}
+        <div className="w-full aspect-square overflow-hidden">
+          <img
+            src={post.image}
+            alt="Post"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        {/* Post Content */}
+        <div className="p-4">
+          <div className="text-lg font-medium text-gray-800">{post.content}</div>
+            <div className="flex justify-between">
+              <div className="text-sm text-gray-500  align-middle">
+                Posted By: {post.author?.fullname || "Unknown"}
+              </div>
+
+              {/* Like Button */}
+              <div className="flex gap-3"> 
+                <button
+                onClick={() => handleLike(post._id)}
+                className=" text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                ❤️Like 
+                </button>
+                <div className="text-black">{post.likes.length}</div>
+                
+              </div>
           </div>
         </div>
-      ))}
-    </div>
+
+      </div>
+    ))}
+  </div>
   );
 };
 

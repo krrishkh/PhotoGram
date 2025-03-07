@@ -58,36 +58,38 @@ const UploadPost = ({ }) => {
   
 
   return (
-    <div className="p-4 border rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold mb-4">Create a New Post</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <textarea
-          placeholder="What's on your mind?"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full p-2 border rounded-md"
-        />
+    <div className="justify-center flex">
+      <div className="p-4 border rounded-lg shadow-lg lg:w-1/3 bg-purple-300 ">
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Create a New Post</h2>
+        <form onSubmit={handleSubmit} className="space-y-4 text-black">
+          <textarea
+            placeholder="What's on your mind?"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="w-full p-2 border rounded-md"
+          />
 
-        <input type="file" accept="image/*" onChange={handleImageChange} />
+          <input type="file" accept="image/*" onChange={handleImageChange} />
 
-        <p className="text-center">OR</p>
+          <p className="text-center">OR</p>
 
-        <input
-          type="text"
-          placeholder="Paste Image URL"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-          className="w-full p-2 border rounded-md"
-        />
+          <input
+            type="text"
+            placeholder="Paste Image URL"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            className="w-full p-2 border rounded-md"
+          />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          {loading ? "Uploading..." : "Upload Post"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md "
+          >
+            {loading ? "Uploading..." : "Upload Post"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

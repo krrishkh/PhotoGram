@@ -1,14 +1,12 @@
-import axios from "axios";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
-function Login() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
+const Login = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,87 +14,61 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Clear any previous errors
-    setLoading(true); // Show loading state
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/login",
-        formData,
-        { withCredentials: true } // Ensure cookies are sent/received
-      );
-      alert("Log in successful!");
-      console.log(response.data);
-      const { accessToken, refreshToken } = response.data.data;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
+      const { data } = await axios.post("http://localhost:5000/api/v1/login", formData);
+      localStorage.setItem("accessToken", data.token);
+
+      // Redirect to intended page or home if not provided
+      const redirectTo = location.state?.redirectTo || "/";
+      navigate(redirectTo);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
-      setError(error.response?.data?.message || "Login failed. Please try again.");
-    } finally {
-      setLoading(false); // Reset loading state
+      setError("Invalid email or password. Please try again.");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+    <div className="max-w-md mx-auto mt-10">
+      <h2 className="text-2xl font-semibold mb-4">Login</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit}>
-
-        {/* Username Field */}
         <div className="mb-4">
-          <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-            Username
-          </label>
+          <label>Username:</label>
           <input
-            type="text"
-            id="username"
+            type="username"
             name="username"
             value={formData.username}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your username"
+            className="w-full p-2 border rounded"
           />
         </div>
-
-        {/* Password Field */}
         <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
+          <label>Password:</label>
           <input
             type="password"
-            id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your password"
+            className="w-full p-2 border rounded"
           />
         </div>
-
-        {/* Error Message */}
-        {error && (
-          <p className="text-red-600 mb-4 text-sm">
-            {error}
-          </p>
-        )}
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none ${
-            loading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          {loading ? "Logging in..." : "Login"}
+        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+          Login
         </button>
-
       </form>
+      <p className="mt-4">
+        Don't have an account?{" "}
+        <button
+          onClick={() => navigate("/register")}
+          className="text-blue-500 underline"
+        >
+          Register here
+        </button>
+      </p>
     </div>
   );
-}
+};
 
 export default Login;
