@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,15 +15,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/login", formData);
-      localStorage.setItem("accessToken", data.token);
+      let { data } = await axios.post("http://localhost:5000/api/v1/login", formData);
+      console.log("data", data.data.refreshToken)
+      localStorage.setItem("refreshToken", data.data.refreshToken);
 
       // Redirect to intended page or home if not provided
       const redirectTo = location.state?.redirectTo || "/";
       navigate(redirectTo);
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
-      setError("Invalid email or password. Please try again.");
+      setError("Invalid username or password. Please try again.");
     }
   };
 
@@ -51,7 +52,7 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
         </div>
         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">

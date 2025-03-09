@@ -13,7 +13,7 @@ function App() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const isAuthenticated = !!localStorage.getItem("accessToken"); // Check if user is logged in
+  const isAuthenticated = !!localStorage.getItem("refreshToken"); // Check if user is logged in
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +38,7 @@ function App() {
   };
 
   return (
+    
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-900 to-blue-900 text-white overflow-x-hidden">
       <Navbar />
       <div className="flex flex-col items-center justify-center text-center py-16 px-4">

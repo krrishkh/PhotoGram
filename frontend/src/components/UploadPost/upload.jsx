@@ -37,7 +37,7 @@ const UploadPost = ({ }) => {
         postData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
             "Content-Type": image ? "multipart/form-data" : "application/json",
           },
         }

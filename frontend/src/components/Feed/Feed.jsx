@@ -9,7 +9,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem("refreshToken");
         if (!token) {
           console.error("No access token found!");
           return;
@@ -35,7 +35,7 @@ const Feed = () => {
   // Handle like function
   const handleLike = async (postId) => {
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("refreshToken");
       if (!token) {
         console.error("No access token found!");
         return;
@@ -80,6 +80,7 @@ const Feed = () => {
   if (loading) return <p>Loading posts...</p>;
 
   return (
+    
     <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     {posts.map((post) => (
       <div key={post._id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">

@@ -87,12 +87,16 @@ const loginUser = asyncHandler( async (req, res) => {
 
     const {accessToken , refreshToken} = await generateAccessAndRefreshToken(user._id)
     
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+    const loggedInUser = await User.findById(user._id).select("-password")
 
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        
     }
+    
+    res.cookie("accessToken", accessToken?? null)
+    res.cookie("refreshToken", refreshToken)
 
     return res
     .status(200)
@@ -102,11 +106,13 @@ const loginUser = asyncHandler( async (req, res) => {
         new ApiResponse(
             200, 
             {
-                user: loggedInUser, accessToken, refreshToken
+                user: loggedInUser, accessToken , refreshToken
                 
             },
             "User Logged in successfully"
-        )
+        ),
+        accessToken,
+        refreshToken
     )
 
 })
@@ -205,7 +211,6 @@ const uploadPost = asyncHandler(async (req, res) => {
 
 
 const getFeed = asyncHandler(async (req, res) => {
-    console.log("getFeed")
     // Fetch all posts with author details and likes count
     const posts = await Post.find()
       .populate("author", "fullname")  // Fetches author's fullname
