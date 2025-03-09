@@ -48,6 +48,7 @@ const UploadPost = ({ }) => {
       setContent("");
       setImage(null);
       setImageUrl("");
+      alert("Image Uploaded Successfully ")
     } catch (error) {
       console.error("Error uploading post:", error.response);
       alert(`Error uploading post: ${error.response?.data?.message || error}`);
