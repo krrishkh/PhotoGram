@@ -122,6 +122,52 @@ The frontend will be available at [http://localhost:5173](http://localhost:5173)
 - `npm run dev`: Starts the Vite development server.
 - `npm run build`: Builds the production-ready frontend.
 
+
+
+
+## 🚀 Features
+
+1. **Homepage**  
+   - Two main buttons:
+     - **Explore**: View uploaded images.  
+     - **Upload**: Navigate to the image upload page.
+    
+  ![image](https://github.com/user-attachments/assets/b99f55ae-0e65-4d56-875c-78d793d6105c)
+
+2. **Login Page**  
+   - Secure user authentication.  
+   - Access control to the upload feature.
+     
+  ![image](https://github.com/user-attachments/assets/21d4371a-f4e7-4954-978a-8b2356fc30b8)
+
+
+3. **Image Upload Page**  
+   - Upload images with ease.  
+   - Stores and manages uploaded images on the server.
+   - can upload by image url or local storage.
+
+  ![image](https://github.com/user-attachments/assets/4148779c-6217-429d-915d-a80f82f08fe1)
+
+  
+
+4. **Explore Page**  
+   - View and explore all uploaded images.  
+   - User-friendly interface for seamless navigation.
+   - You can like any image and can see all likes.
+  
+  ![image](https://github.com/user-attachments/assets/55c04103-d03f-4731-8f92-695643576270)
+
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React  
+- **Backend**: Node.js  
+- **Hosting**: Vercel (Frontend), Krutrium (Backend)  
+
+## 📂 Project Structure
+
+
+
 ## Troubleshooting
 
 1. Ensure MongoDB is running and the `MONGO_URI` is correct.
