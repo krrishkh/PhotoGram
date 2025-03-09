@@ -80,13 +80,7 @@ cd ../frontend
 npm install
 ```
 
-#### Configure the API Endpoint
 
-Create a `.env` file in the `frontend` directory and add:
-
-```env
-VITE_API_URL=http://localhost:5000
-```
 
 #### Start the Frontend Server
 
