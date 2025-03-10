@@ -20,7 +20,8 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/register", formData);
+      console.log("hii")
+      await axios.post("http://localhost:5000/api/v1/register", formData);
       navigate("/login"); // Redirect to login after successful registration
     } catch (err) {
       setError("Registration failed. Please try again.");
@@ -37,27 +38,27 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         {/* Full Name Field */}
         <div className="mb-4">
-          <label>Full Name:</label>
+          <label htmlFor="fullname" className="block mb-1 font-medium">Full Name:</label>
           <input
             type="text"
             name="fullname"
             value={formData.fullname}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
         </div>
 
         {/* Username Field */}
         <div className="mb-4">
-          <label>Username:</label>
+        <label htmlFor="username" className="block mb-1 font-medium">Username:</label>
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
         </div>
 
@@ -70,7 +71,7 @@ const Register = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
         </div>
 

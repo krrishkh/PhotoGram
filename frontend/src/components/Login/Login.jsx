@@ -41,7 +41,7 @@ const Login = () => {
             value={formData.username}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
           />
         </div>
         <div className="mb-4">
