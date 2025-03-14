@@ -162,7 +162,6 @@ The frontend will be available at [http://localhost:5173](http://localhost:5173)
 
 - **Frontend**: React  
 - **Backend**: Node.js  
-- **Hosting**: Vercel (Frontend), Krutrium (Backend)  
 
 ## 📂 Project Structure
 
